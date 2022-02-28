@@ -1,9 +1,9 @@
 [package]
 name = "encode_rs_fs"
-Description = "Read and Write files with encoding_rs."
+description = "Read and Write files with encoding_rs."
 version = "0.1.0"
 edition = "2021"
-License = "MIT"
+license = "MIT"
 
 # See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
 
