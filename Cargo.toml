@@ -1,6 +1,6 @@
 [package]
 name = "encode_rs_fs"
-version = "0.1.0"
+version = "0.1.1"
 edition = "2021"
 description = "Read and Write files with encoding_rs."
 readme = "README.md"
