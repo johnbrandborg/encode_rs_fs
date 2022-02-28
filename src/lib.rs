@@ -1,20 +1,15 @@
+//!  Read and Write files using encodings.
+//! 
+//!  This module contains simple functions that assist with encooding and
+//!  decoding of files.
 use std::error::Error;
 use std::fs::File;
 use std::io::prelude::*;
 use encoding_rs::*;
 
 
-pub fn write(path: &str, contents: &str, codec: &str) -> Result<(), Box<dyn Error>> {
-    let encoding = Encoding::for_label(codec.as_bytes()).unwrap();
-    
-    let mut file = File::create(path)?;
-    let (cow, _encoding_used, _had_errors) = encoding.encode(contents);
-    let byte_code = &cow[..]; 
-    file.write_all(byte_code)?;
-
-    Ok(())
-}
-
+/// Supply the file path, and encoding needed to read a new from disk as a
+/// [`String`].
 pub fn read(path: &str, codec: &str) -> Result<String, Box<dyn Error>> {
     let encoding = Encoding::for_label(codec.as_bytes()).unwrap();
 
@@ -26,6 +21,19 @@ pub fn read(path: &str, codec: &str) -> Result<String, Box<dyn Error>> {
     let byte_code = String::from(&cow[..]);
 
     Ok(byte_code)
+}
+
+/// Supply the file path, contents and encoding needed to write a new file to
+/// disk.  The contents is supplied as a [`String`] or string slice.
+pub fn write(path: &str, contents: &str, codec: &str) -> Result<(), Box<dyn Error>> {
+    let encoding = Encoding::for_label(codec.as_bytes()).unwrap();
+    
+    let mut file = File::create(path)?;
+    let (cow, _encoding_used, _had_errors) = encoding.encode(contents);
+    let byte_code = &cow[..]; 
+    file.write_all(byte_code)?;
+
+    Ok(())
 }
 
 
